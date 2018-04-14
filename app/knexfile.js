@@ -1,6 +1,6 @@
 var dotenv = require('dotenv')
 
-dotenv.load()
+dotenv.config({silent: true})
 
 module.exports = {
   client: 'mysql',

@@ -6,7 +6,7 @@ var bodyParser = require('body-parser')
 var dotenv = require('dotenv')
 
 // Load environment variables from .env file
-dotenv.load()
+dotenv.config({silent: true})
 var app = express()
 
 var API = require('./controllers/api')
