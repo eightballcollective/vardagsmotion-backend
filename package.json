@@ -9,6 +9,7 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "compression": "^1.6.2",
+    "cors": "^2.8.4",
     "dotenv": "^2.0.0",
     "eslint": "^4.19.1",
     "express": "^4.13.4",
