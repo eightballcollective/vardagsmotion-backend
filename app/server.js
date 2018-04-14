@@ -11,6 +11,24 @@ var app = express()
 
 var API = require('./controllers/api')
 
+app.use(function(req, res, next) {
+  const allowedOrigins = [
+    process.env.FRONTEND_ORIGIN || 'http://localhost:3000',
+  ]
+  const origin = allowedOrigins.find(origin => origin == req.headers.origin)
+  if (origin) {
+    res.header('Access-Control-Allow-Origin', origin)
+    res.header('Access-Control-Allow-Credentials', 'true')
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept'
+    )
+  }
+  // Allow preflight
+  if (req.method === 'OPTIONS')
+    return res.end()
+  next()
+})
 app.set('port', process.env.PORT || 3000)
 app.use(compression())
 app.use(logger('dev'))
