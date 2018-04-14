@@ -15,7 +15,7 @@ module.exports.getDecisions = function(req) {
 }
 
 getDecisions = function() {
-  const data = knex('testdata').select('hangar_id', 'titel', 'typrubrik', 'datum', 'dokument_url_html','sammanfattning')
+  const data = knex('testdata').select('hangar_id as id', 'titel as title', 'typrubrik as subtitle', 'datum as date', 'dokument_url_html as href','sammanfattning as summary')
   return data
 }
 
