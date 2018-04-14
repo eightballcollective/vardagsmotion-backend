@@ -3,7 +3,7 @@ import requests
 import json
 
 subjects = {
-    'Miljö': ['miljö', 'skog', 'hav', 'sjö', 'fjäll', 'förorening', 'luft', 'bränsle', 'fosil', 'elektricitet', 'förnyelsebar'],
+    'Miljö': ['miljö', 'skog', 'hav', 'sjö', 'fjäll', 'förorening', 'luft', 'bränsle', 'fosil', 'förnyelsebar'],
     'Utbildning': ['utbildning', 'skola', 'gymnasie', 'gymnasium'],
     'Skatter': ['skatter', 'skuld'],
     #'Politik': ['politik', 'parti'],
@@ -31,9 +31,13 @@ for row in cur.fetchall():
         count = 0
         for trigger in subjects[tag]:
             count += text.count(trigger)
-        if count >= 20: tags.append(tag)
+        if count >= 5: tags.append((count, tag))
 
-    data = json.dumps(tags)
+    taglist = [b for a,b in sorted(tags)[-2:]]
+    if len(taglist) <= 0:
+        taglist = ['Övrigt']
+
+    data = json.dumps(taglist)
 
     cur.execute('INSERT INTO taggar (hangar_id, tag) VALUES(%s, %s)', (row[0], data))
     db.commit()
