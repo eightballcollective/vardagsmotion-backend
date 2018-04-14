@@ -6,8 +6,7 @@ module.exports.test = function() {
 }
 
 module.exports.getPartyVotes = function(req) {
-	//req ska skicka med hangar_id
-  return getAllVotes(4781751)
+  return getAllVotes(req.query.id)
 }
 
 module.exports.getDecisions = function(req) {
@@ -15,7 +14,7 @@ module.exports.getDecisions = function(req) {
 }
 
 getDecisions = function() {
-  const data = knex('testdata').select('hangar_id as id', 'titel as title', 'typrubrik as subtitle', 'datum as date', 'dokument_url_html as href','sammanfattning as summary')
+  const data = knex('dokument').select('hangar_id as id', 'titel as title', 'typrubrik as subtitle', 'datum as date', 'dokument_url_html as href')
   return data
 }
 
