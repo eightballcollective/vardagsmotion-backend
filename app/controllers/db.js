@@ -14,7 +14,9 @@ module.exports.getDecisions = function(req) {
 }
 
 getDecisions = function() {
-  const data = knex('dokument').select('hangar_id as id', 'titel as title', 'typrubrik as subtitle', 'datum as date', 'dokument_url_html as href')
+  const data = knex('taggar')
+    .join('dokument', 'taggar.hangar_id', 'dokument.hangar_id')
+    .select('dokument.hangar_id as id', 'dokument.titel as title', 'dokument.typrubrik as subtitle', 'dokument.datum as date', 'dokument.dokument_url_html as href', 'taggar.tag as tags',)
   return data
 }
 
