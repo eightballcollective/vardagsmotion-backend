@@ -8,9 +8,16 @@ router.get('/test', (req, res) => {
   })
 })
 
-router.get('/motions', (req, res) => {
-  const motions = require('../resources/data')
-  res.send(motions)
+router.get('/decisions', (req, res) => {
+  db.getDecisions().then(data => {
+  	res.send(data);
+  })
+})
+
+router.get('/partyVotes', (req, res) => {
+  db.getPartyVotes(req).then(data => {
+    res.send(data);
+  })
 })
 
 module.exports = router
