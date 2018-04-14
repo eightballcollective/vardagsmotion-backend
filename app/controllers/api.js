@@ -10,13 +10,13 @@ router.get('/test', (req, res) => {
 
 router.get('/decisions', (req, res) => {
   db.getDecisions().then(data => {
-  	res.send(data);
+  	res.send(data)
   })
 })
 
 router.get('/partyVotes', (req, res) => {
   db.getPartyVotes(req).then(data => {
-    res.send(data);
+    res.send(data)
   })
 })
 
