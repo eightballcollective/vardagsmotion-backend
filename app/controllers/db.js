@@ -14,9 +14,19 @@ module.exports.getDecisions = function(req) {
 }
 
 getDecisions = function() {
-  const data = knex('taggar')
-    .join('dokument', 'taggar.hangar_id', 'dokument.hangar_id')
-    .select('dokument.hangar_id as id', 'dokument.titel as title', 'dokument.typrubrik as subtitle', 'dokument.datum as date', 'dokument.dokument_url_html as href', 'taggar.tag as tags',)
+  const data = knex.raw(`
+      SELECT id, title, subtitle, date, href, tags
+      FROM (
+        SELECT DISTINCT votering.hangar_id
+        FROM votering
+      ) a
+      INNER JOIN (
+        SELECT dokument.hangar_id as id, dokument.titel as title, dokument.typrubrik as subtitle, dokument.datum as date, dokument.dokument_url_html as href, taggar.tag as tags
+        FROM dokument
+        INNER JOIN taggar ON taggar.hangar_id=dokument.hangar_id
+      ) b
+      ON a.hangar_id=b.id
+    `)
   return data
 }
 
