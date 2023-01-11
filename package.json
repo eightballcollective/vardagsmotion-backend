@@ -14,7 +14,7 @@
     "eslint": "^4.19.1",
     "express": "^4.13.4",
     "express-session": "^1.2.1",
-    "knex": "^0.10.0",
+    "knex": "^2.4.0",
     "method-override": "^2.3.5",
     "morgan": "^1.7.0",
     "mysql": "^2.10.2",
